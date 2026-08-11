@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Register Modal Panels</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loginBox {
+      width: 600px;
+      height: 500px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panelToggle {
+      display: flex;
+      justify-content: space-around;
+      background-color: #28a745;
+    }
+
+    .panelToggle button {
+      flex: 1;
+      padding: 15px 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .panelToggle button.active {
+      background-color: #19692c;
+    }
+
+    .modalPanels {
+      position: relative;
+      height: 300px; /* adjust as needed */
+    }
+
+    .panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 30px;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .panel.visible {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+    }
+
+    .panel.hidden {
+      /* you can slide it out horizontally */
+      transform: translateX(100%);
+    }
+
+    /* For sliding back visible of the other panel: define its hidden state */
+    .panel.slide-in-left {
+      transform: translateX(-100%);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #28a745;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #218838;
+    }
+
+  </style>
+</head>
+<body>
+    <!-- Alerts Start -->
+   {% if messages %}
+      <section style="
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+      ">
+        <div id="message-container">
+          {% for message in messages %}
+            <div style="
+              background-color: {% if 'success' in message.tags %}#d4edda
+                              {% elif 'error' in message.tags %}#f8d7da
+                              {% else %}#fff3cd{% endif %};
+              color: {% if 'success' in message.tags %}#155724
+                    {% elif 'error' in message.tags %}#721c24
+                    {% else %}#856404{% endif %};
+              padding: 16px 22px;
+              margin-bottom: 12px;
+              border-left: 5px solid {% if 'success' in message.tags %}#28a745
+                                          {% elif 'error' in message.tags %}#dc3545
+                                          {% else %}#ffc107{% endif %};
+              border-radius: 5px;
+              font-family: 'Segoe UI', sans-serif;
+              font-size: 18px; /* Increased font size */
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+              min-width: 270px;
+              max-width: 420px;
+              position: relative;
+            ">
+              <span style="
+                position: absolute;
+                right: 12px;
+                top: 6px;
+                font-size: 22px;
+                color: inherit;
+                cursor: pointer;
+              " onclick="this.parentElement.style.display='none';">&times;</span>
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <script>
+        setTimeout(function () {
+          const container = document.getElementById('message-container');
+          if (container) {
+            container.style.display = 'none';
+          }
+        }, 2000);
+      </script>
+    {% endif %}
+
+
+  <!-- Alerts End -->
+
+
+  <div class="loginBox">
+    <!-- Buttons to toggle -->
+    <div class="panelToggle">
+      <button id="btnLogin" class="active">Login</button>
+      <button id="btnRegister">Register</button>
+    </div>
+
+    <div class="modalPanels">
+        <form method="post" action="{% url 'farmapp:login_process' %}">
+    {% csrf_token %}
+      <!-- Login Panel -->
+      <div id="panelLogin" class="panel visible">
+        <h2 style="margin-top: 34px;margin-bottom: 34px;">Login</h2>
+        <div class="input-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email">
+        </div>
+        <br>
+        <div class="input-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password">
+        </div>
+        <br>
+        <button class="btn" type="submit">Login</button>
+      </div>
+        </form>
+      <!-- Register Panel -->
+      <div id="panelRegister" class="panel hidden">
+        <form method="post" action="{% url 'farmapp:register_page' %}">
+            {% csrf_token %}
+        <h2>Register</h2>
+        <div class="input-group">
+          <label for="registerName">Name</label>
+          <input type="text" id="registerName" name="registerName" placeholder="Enter your name">
+        </div>
+        <div class="input-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" name="registerEmail" placeholder="Enter your email">
+        </div>
+        <div class="input-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" name="registerPassword" placeholder="Enter your password">
+        </div>
+        <div class="input-group">
+          <label for="registerConfirmPassword">Confirm Password</label>
+          <input type="password" id="registerConfirmPassword" name="registerConfirmPassword" placeholder="Confirm your password">
+        </div>
+        <button class="btn" type="submit">Register</button>
+      </div>
+        </form>
+    </div>
+  </div>
+
+  <script>
+    const btnLogin = document.getElementById('btnLogin');
+    const btnRegister = document.getElementById('btnRegister');
+    const panelLogin = document.getElementById('panelLogin');
+    const panelRegister = document.getElementById('panelRegister');
+
+    btnLogin.addEventListener('click', () => {
+      // Toggle which panel is active
+      btnLogin.classList.add('active');
+      btnRegister.classList.remove('active');
+
+      // Show login panel
+      panelLogin.classList.remove('hidden');
+      panelLogin.classList.add('visible');
+      // Hide register panel
+      panelRegister.classList.remove('visible');
+      panelRegister.classList.add('hidden');
+    });
+
+    btnRegister.addEventListener('click', () => {
+      btnRegister.classList.add('active');
+      btnLogin.classList.remove('active');
+
+      // Show register panel
+      panelRegister.classList.remove('hidden');
+      panelRegister.classList.add('visible');
+      // Hide login panel
+      panelLogin.classList.remove('visible');
+      panelLogin.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>
