@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CricIQ - Prediction Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0B0F19; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #1a1f2e; padding: 40px; border-radius: 20px; width: 500px; box-shadow: 0 0 40px rgba(0,255,200,0.1); border: 1px solid #2a3040; text-align: center; }
+        h1 { color: #00F5A0; font-size: 32px; margin-bottom: 5px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
+        .winner-box { background: linear-gradient(to right, #00F5A0, #00D9F5); padding: 20px; border-radius: 15px; margin: 20px 0; }
+        .winner-box h2 { color: #000; font-size: 28px; margin: 0; }
+        .winner-box p { color: #000; opacity: 0.7; margin: 5px 0 0; font-size: 14px; }
+        .prob-container { display: flex; justify-content: space-between; margin: 20px 0; }
+        .prob-box { width: 45%; background: #0B0F19; padding: 15px; border-radius: 12px; border: 1px solid #2a3040; }
+        .prob-box .team { font-weight: bold; font-size: 16px; }
+        .prob-box .value { font-size: 24px; font-weight: bold; margin-top: 5px; }
+        .prob-box .bar { width: 100%; height: 8px; background: #2a3040; border-radius: 10px; margin-top: 8px; overflow: hidden; }
+        .prob-box .bar-fill { height: 100%; background: linear-gradient(to right, #00F5A0, #00D9F5); border-radius: 10px; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; font-size: 14px; background: #0B0F19; padding: 15px; border-radius: 12px; }
+        .detail-grid span { color: #aaa; }
+        .detail-grid strong { color: white; }
+        .btn { display: inline-block; margin-top: 20px; padding: 12px 30px; background: #2a3040; color: white; text-decoration: none; border-radius: 10px; transition: 0.3s; }
+        .btn:hover { background: #3a4050; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏏 CricIQ</h1>
+        <div class="subtitle">Prediction Result</div>
+        
+        <div class="winner-box">
+            <h2>🏆 {{ winner }}</h2>
+            <p>Predicted Winner</p>
+        </div>
+        
+        <div class="prob-container">
+            <div class="prob-box">
+                <div class="team">{{ team1 }}</div>
+                <div class="value">{{ team1_prob }}%</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width: {{ team1_prob }}%;"></div>
+                </div>
+            </div>
+            <div class="prob-box">
+                <div class="team">{{ team2 }}</div>
+                <div class="value">{{ team2_prob }}%</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width: {{ team2_prob }}%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detail-grid">
+            <span>Match Venue: <strong>{{ venue }}</strong></span>
+            <span>Toss Winner: <strong>{{ toss_winner }}</strong></span>
+        </div>
+        
+        <a href="/" class="btn">← Predict Again</a>
+    </div>
+</body>
+</html>

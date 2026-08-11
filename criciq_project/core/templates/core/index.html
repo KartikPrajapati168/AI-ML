@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CricIQ - Match Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0B0F19; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #1a1f2e; padding: 40px; border-radius: 20px; width: 450px; box-shadow: 0 0 40px rgba(0,255,200,0.1); border: 1px solid #2a3040; }
+        h1 { text-align: center; color: #00F5A0; font-size: 36px; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #888; font-size: 14px; margin-bottom: 30px; }
+        label { display: block; margin-top: 15px; font-size: 14px; font-weight: bold; color: #aaa; }
+        select, input { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #2a3040; background: #0B0F19; color: white; font-size: 16px; box-sizing: border-box; }
+        select:focus, input:focus { outline: none; border-color: #00F5A0; }
+        button { width: 100%; padding: 14px; margin-top: 25px; background: linear-gradient(to right, #00F5A0, #00D9F5); color: black; font-weight: bold; font-size: 18px; border: none; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        button:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(0,255,200,0.3); }
+        .error { color: #ff6b6b; text-align: center; margin-top: 15px; }
+        .footer { text-align: center; margin-top: 20px; color: #444; font-size: 12px; }
+    </style>
+</head>
+<!-- index.html का पूरा नया कोड (बाकी CSS/Head वही रहेगा) -->
+<body>
+    <div class="container">
+        <h1>🏏 CricIQ</h1>
+        <div class="subtitle">AI-Powered IPL Match Predictor</div>
+        
+        <form method="POST" action="/predict/" id="predictionForm">
+            {% csrf_token %}
+            
+            <!-- Team 1 -->
+            <label for="team1">Team 1</label>
+            <select name="team1" id="team1" required>
+                <option value="">Select Team 1</option>
+                {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Team 2 -->
+            <label for="team2">Team 2</label>
+            <select name="team2" id="team2" required>
+                <option value="">Select Team 2</option>
+                {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Venue -->
+            <label for="venue">Venue</label>
+            <select name="venue" id="venue" required>
+                <option value="">Select Venue</option>
+                {% for venue in venues %}
+                <option value="{{ venue }}">{{ venue }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Toss Winner (Dynamic) -->
+            <label for="toss_winner">Toss Winner</label>
+            <select name="toss_winner" id="toss_winner" required>
+                <option value="">-- Select Teams First --</option>
+            </select>
+
+            <!-- Toss Decision -->
+            <label for="toss_decision">Toss Decision</label>
+            <select name="toss_decision" id="toss_decision" required>
+                <option value="">Select Decision</option>
+                <option value="bat">Bat</option>
+                <option value="field">Field</option>
+            </select>
+
+            <button type="submit">🔥 Predict Winner</button>
+            
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+        </form>
+        <div class="footer">Powered by Django &amp; Machine Learning</div>
+    </div>
+
+    <!-- ✅ JavaScript Magic: Toss Winner को Auto-Update करना -->
+    <script>
+        const team1Select = document.getElementById('team1');
+        const team2Select = document.getElementById('team2');
+        const tossWinnerSelect = document.getElementById('toss_winner');
+
+        function updateTossWinner() {
+            const team1 = team1Select.value;
+            const team2 = team2Select.value;
+
+            // पुराने options हटाओ
+            tossWinnerSelect.innerHTML = '';
+
+            // अगर Team1 या Team2 सेलेक्ट नहीं है, तो प्लेसहोल्डर दिखाओ
+            if (!team1 || !team2) {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = '-- Select Both Teams First --';
+                tossWinnerSelect.appendChild(option);
+                return;
+            }
+
+            // Team1 और Team2 को Toss Winner में डालो
+            const option1 = document.createElement('option');
+            option1.value = team1;
+            option1.textContent = team1;
+            tossWinnerSelect.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = team2;
+            option2.textContent = team2;
+            tossWinnerSelect.appendChild(option2);
+
+            // Default (पहला विकल्प) Auto-Select हो जाए
+            tossWinnerSelect.selectedIndex = 0;
+        }
+
+        // जब भी Team1 या Team2 बदले, Toss Winner अपडेट हो
+        team1Select.addEventListener('change', updateTossWinner);
+        team2Select.addEventListener('change', updateTossWinner);
+
+        // Page Load पर एक बार चलाएं ताकि अगर पहले से सेलेक्टेड हो तो अपडेट हो
+        updateTossWinner();
+    </script>
+</body>
+</html>
