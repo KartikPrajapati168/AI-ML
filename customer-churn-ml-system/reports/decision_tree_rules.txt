@@ -1,0 +1,106 @@
+|--- num__Payment Delay <= -0.18
+|   |--- num__Usage Frequency <= -1.08
+|   |   |--- num__Age <= 0.61
+|   |   |   |--- num__Usage Frequency <= -1.42
+|   |   |   |   |--- cat__Contract Length_Annual <= 0.50
+|   |   |   |   |   |--- num__Tenure <= -1.55
+|   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |--- num__Tenure >  -1.55
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- cat__Contract Length_Annual >  0.50
+|   |   |   |   |   |--- num__Total Spend <= -0.92
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- num__Total Spend >  -0.92
+|   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |--- num__Usage Frequency >  -1.42
+|   |   |   |   |--- num__Tenure <= -1.55
+|   |   |   |   |   |--- cat__Subscription Type_Basic <= 0.50
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |--- cat__Subscription Type_Basic >  0.50
+|   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |--- num__Tenure >  -1.55
+|   |   |   |   |   |--- class: 0
+|   |   |--- num__Age >  0.61
+|   |   |   |--- num__Support Calls <= -0.61
+|   |   |   |   |--- num__Tenure <= -1.55
+|   |   |   |   |   |--- num__Usage Frequency <= -1.31
+|   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |--- num__Usage Frequency >  -1.31
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__Tenure >  -1.55
+|   |   |   |   |   |--- cat__Contract Length_Annual <= 0.50
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |--- cat__Contract Length_Annual >  0.50
+|   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |--- num__Support Calls >  -0.61
+|   |   |   |   |--- class: 1
+|   |--- num__Usage Frequency >  -1.08
+|   |   |--- class: 0
+|--- num__Payment Delay >  -0.18
+|   |--- num__Support Calls <= -0.29
+|   |   |--- cat__Gender_Male <= 0.50
+|   |   |   |--- num__Payment Delay <= 0.38
+|   |   |   |   |--- num__Usage Frequency <= -1.20
+|   |   |   |   |   |--- num__Support Calls <= -0.61
+|   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |--- num__Support Calls >  -0.61
+|   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |--- num__Usage Frequency >  -1.20
+|   |   |   |   |   |--- num__Usage Frequency <= -1.08
+|   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |--- num__Usage Frequency >  -1.08
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |--- num__Payment Delay >  0.38
+|   |   |   |   |--- num__Total Spend <= -0.16
+|   |   |   |   |   |--- num__Total Spend <= -0.16
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- num__Total Spend >  -0.16
+|   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |--- num__Total Spend >  -0.16
+|   |   |   |   |   |--- cat__Contract Length_Monthly <= 0.50
+|   |   |   |   |   |   |--- truncated branch of depth 7
+|   |   |   |   |   |--- cat__Contract Length_Monthly >  0.50
+|   |   |   |   |   |   |--- class: 1
+|   |   |--- cat__Gender_Male >  0.50
+|   |   |   |--- num__Usage Frequency <= -1.42
+|   |   |   |   |--- num__Support Calls <= -0.61
+|   |   |   |   |   |--- cat__Contract Length_Annual <= 0.50
+|   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |--- cat__Contract Length_Annual >  0.50
+|   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |--- num__Support Calls >  -0.61
+|   |   |   |   |   |--- num__Age <= 0.61
+|   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |--- num__Age >  0.61
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |--- num__Usage Frequency >  -1.42
+|   |   |   |   |--- num__Usage Frequency <= -1.08
+|   |   |   |   |   |--- num__Support Calls <= -0.61
+|   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |--- num__Support Calls >  -0.61
+|   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |--- num__Usage Frequency >  -1.08
+|   |   |   |   |   |--- class: 0
+|   |--- num__Support Calls >  -0.29
+|   |   |--- num__Tenure <= -0.50
+|   |   |   |--- cat__Gender_Male <= 0.50
+|   |   |   |   |--- num__Payment Delay <= 0.38
+|   |   |   |   |   |--- num__Usage Frequency <= -1.08
+|   |   |   |   |   |   |--- truncated branch of depth 7
+|   |   |   |   |   |--- num__Usage Frequency >  -1.08
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__Payment Delay >  0.38
+|   |   |   |   |   |--- num__Total Spend <= -0.15
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- num__Total Spend >  -0.15
+|   |   |   |   |   |   |--- truncated branch of depth 8
+|   |   |   |--- cat__Gender_Male >  0.50
+|   |   |   |   |--- num__Usage Frequency <= -1.08
+|   |   |   |   |   |--- num__Age <= 0.61
+|   |   |   |   |   |   |--- truncated branch of depth 7
+|   |   |   |   |   |--- num__Age >  0.61
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |--- num__Usage Frequency >  -1.08
+|   |   |   |   |   |--- class: 0
+|   |   |--- num__Tenure >  -0.50
+|   |   |   |--- class: 1

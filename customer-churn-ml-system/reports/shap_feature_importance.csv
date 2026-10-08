@@ -1,0 +1,21 @@
+Feature,Mean_Abs_SHAP
+cat__Payment_Delay_Category_High,0.255285877
+num__Support Calls,0.143199365
+num__Tenure,0.09430885
+num__Usage Frequency,0.076397171
+num__Payment Delay,0.057626444
+cat__Gender_Male,0.052165325
+num__Age,0.03666083
+num__Total Spend,0.036211189
+cat__Contract Length_Monthly,0.029117597
+cat__Gender_Female,0.024290568
+cat__Contract Length_Annual,0.009352789
+cat__Subscription Type_Basic,0.002115204
+num__Support_Calls_Per_Tenure,0.001814354
+num__Spend_Per_Tenure,0.001127707
+cat__Subscription Type_Standard,0.000131062
+cat__Subscription Type_Premium,8.52E-05
+num__Last Interaction,5.96E-05
+cat__Contract Length_Quarterly,0
+cat__Payment_Delay_Category_Low,0
+cat__Payment_Delay_Category_Medium,0
